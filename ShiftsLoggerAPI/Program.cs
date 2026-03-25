@@ -18,7 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+//TODO debug this error
 app.MapControllers();
 
 app.Run();
