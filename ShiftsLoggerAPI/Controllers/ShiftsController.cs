@@ -1,11 +1,9 @@
-﻿
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShiftsLoggerAPI.Services;
 using ShiftsLoggerAPI.Models;
 
 [ApiController]
-[Microsoft.AspNetCore.Components.Route("api/[controller]")]
+[Route("api/[controller]")]
 
 public class ShiftsCntroller(IShiftsService shiftService) : ControllerBase
 {
