@@ -4,8 +4,8 @@
     {
 
         public int id { get; set; }
-        public required DateTime start { get; set; }
-        public required DateTime end { get; set; }
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
         public string JobTitle { get; set; } = string.Empty;
 
         public decimal HoursWorked

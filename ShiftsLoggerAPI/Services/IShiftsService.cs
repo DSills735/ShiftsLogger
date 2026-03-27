@@ -32,9 +32,9 @@ namespace ShiftsLoggerAPI.Services
         }
         public Shift CreateShift(Shift shift)
         {
-           var savedShift = _context.Shifts?.Add(shift);
+            _context.Shifts!.Add(shift);
             _context.SaveChanges();
-            return savedShift!;
+            return shift;
         }
         public Shift UpdateShift(int id, Shift shift)
         {
