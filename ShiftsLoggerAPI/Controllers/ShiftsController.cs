@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShiftsLoggerAPI.Services;
 using ShiftsLoggerAPI.Models;
+// Postman URLs
+// GET    https://localhost:7064/api/shifts
+// GET    https://localhost:7064/api/shifts/{id}
+// POST   https://localhost:7064/api/shifts
+// PUT    https://localhost:7064/api/shifts/{id}
+// DELETE https://localhost:7064/api/shifts/{id}
 
 [ApiController]
 [Route("api/[controller]")]
 
-public class ShiftsCntroller(IShiftsService shiftService) : ControllerBase
+public class ShiftsController(IShiftsService shiftService) : ControllerBase
 {
     private readonly IShiftsService _shiftService = shiftService;
 
