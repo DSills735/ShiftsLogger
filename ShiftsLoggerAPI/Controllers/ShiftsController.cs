@@ -50,7 +50,7 @@ public class ShiftsController(IShiftsService shiftService) : ControllerBase
         {
             return NotFound();
         }
-        return Ok(result); // Fixed: was calling UpdateShift twice
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]
@@ -61,7 +61,7 @@ public class ShiftsController(IShiftsService shiftService) : ControllerBase
         {
             return NotFound();
         }
-        return Ok(result); // Fixed: was calling DeleteShift twice
+        return Ok(result);
     }
 
     public static void LogShift()

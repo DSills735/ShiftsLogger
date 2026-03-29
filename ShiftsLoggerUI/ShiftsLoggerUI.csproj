@@ -16,8 +16,4 @@
     <ProjectReference Include="..\ShiftsLoggerAPI\ShiftsLoggerAPI.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validation\" />
-  </ItemGroup>
-
 </Project>
