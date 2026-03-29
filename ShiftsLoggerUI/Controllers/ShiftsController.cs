@@ -1,5 +1,6 @@
 ﻿
 using Spectre.Console;
+using System.Globalization;
 
 namespace ShiftsLoggerUI.Controllers
 {
@@ -11,19 +12,19 @@ namespace ShiftsLoggerUI.Controllers
             Console.Clear();
 
             string jobTitle = AnsiConsole.Ask<string>("Enter your job title.");
-            bool validInput = false;
-            DateTime startTime;
-            DateTime endTime;
+            string startTime;
+            string endTime;
+            bool valid = false;
+            AnsiConsole.MarkupLine("Please enter the start time of your shift in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
+                startTime = Console.ReadLine()!;
 
-            while(!validInput)
+            //TODO need to check this validation.. I think its OK
+
+            while (!DateTime.TryParseExact(startTime, "yyyy-MM-dd HH:mm",  CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
             {
-                AnsiConsole.MarkupLine("Please enter the start time of your shift in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
-                startTime = Console.ReadLine();
-                validInput = Validation.ShiftInputValidation.ValidateShiftInput();
+                Console.WriteLine("Invalid input. Please enter a valid start time in the format: yyyy-MM-dd HH:mm");
+                startTime = Console.ReadLine()!;
             }
-            
-
-
             
         }
     }
