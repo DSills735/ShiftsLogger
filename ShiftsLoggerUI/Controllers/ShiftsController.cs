@@ -25,7 +25,17 @@ namespace ShiftsLoggerUI.Controllers
                 Console.WriteLine("Invalid input. Please enter a valid start time in the format: yyyy-MM-dd HH:mm");
                 startTime = Console.ReadLine()!;
             }
-            
+
+            valid = false;
+            AnsiConsole.MarkupLine("Please enter the end time of your shift in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
+            endTime = Console.ReadLine()!;
+
+            while (!DateTime.TryParseExact(endTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid end time in the format: yyyy-MM-dd HH:mm");
+                startTime = Console.ReadLine()!;
+            }
+
         }
     }
 }
