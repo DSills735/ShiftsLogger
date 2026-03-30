@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using ShiftsLoggerUI.Services;
+using Spectre.Console;
 
 namespace ShiftsLoggerUI.Menus
 {
@@ -28,7 +29,8 @@ namespace ShiftsLoggerUI.Menus
                    ShiftsController.LogShift();
                     break;
                 case "View all past shifts":
-                    ShiftsController.ViewShifts();
+                    ShiftsService shiftsService = new ShiftsService();
+                    _ = shiftsService.ShowAllShifts();
                     break;
                 case "Update a shift":
                     ShiftsController.UpdateShift();

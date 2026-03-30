@@ -27,7 +27,7 @@ namespace ShiftsLoggerUI.Services
                 {
                     List<Shift>? deserializedShift = serializedShifts.ShiftList;
 
-                    //Call table display This should be ok. 
+                    Menus.Visualizations.ShowAllShiftsTable(deserializedShift);
                 }
 
 
