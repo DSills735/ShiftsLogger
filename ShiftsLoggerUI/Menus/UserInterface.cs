@@ -20,8 +20,8 @@ namespace ShiftsLoggerUI.Menus
                {
                     "Log a new shift",
                     "View all past shifts",
-                    "Update a shift",
-                    "Delete a shift",
+                    "Update a shift - not implemented",
+                    "Delete a shift - not implemented",
                     "Exit"
                }));
 
@@ -37,10 +37,12 @@ namespace ShiftsLoggerUI.Menus
                     _ = shiftsService.ShowAllShifts();
                     break;
                 case "Update a shift":
-                    ShiftsController.UpdateShift();
+                    
+                    //ShiftController.UpdateShift();
                     break;
                 case "Delete a shift":
-                    ShiftsController.DeleteShift();
+                    
+                    //shiftController.DeleteShift();
                     break;
                 case "Exit":
                     AnsiConsole.MarkupLine("[slowblink][red] Exiting the application. Goodbye![/][/]");
