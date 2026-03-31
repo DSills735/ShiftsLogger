@@ -8,7 +8,7 @@ namespace ShiftsLoggerUI.Controllers
     internal class ShiftController
     {
 
-        internal void LogShift()
+        internal async Task LogShift()
         {
             Console.Clear();
 
@@ -46,7 +46,7 @@ namespace ShiftsLoggerUI.Controllers
             ShiftsService shiftsService = new ShiftsService();
 
             //TODO figure out if this is the best way to handle cs4014
-            _ = shiftsService.LogShift(shift);
+            await shiftsService.LogShift(shift);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ShiftsLoggerUI.Menus
 {
     internal class UserInterface
     {
-        internal static void MainMenu()
+        internal static async Task MainMenu()
         {
             Console.Clear();
             AnsiConsole.MarkupLine("[slowblink][red] Welcome to the shift logging main menu[/][/]");
@@ -28,13 +28,13 @@ namespace ShiftsLoggerUI.Menus
             switch(choice){
                 case "Log a new shift":
                     ShiftController shiftController = new ShiftController();
-                    shiftController.LogShift();
+                    await shiftController.LogShift();
                     break;
 
                 case "View all past shifts":
                     ShiftsService shiftsService = new ShiftsService();
-                    //TODO i think this is broken because of discard operator??
-                    _ = shiftsService.ShowAllShifts();
+                    
+                    await shiftsService.ShowAllShifts();
                     break;
                 case "Update a shift":
                     

@@ -1,7 +1,7 @@
 ﻿namespace ShiftsLoggerUI {
     public class Program {
-        public static void Main(string[] args) {
-            Menus.UserInterface.MainMenu();
+        public static async Task Main(string[] args) {
+           await Menus.UserInterface.MainMenu();
         }
     }
 }
