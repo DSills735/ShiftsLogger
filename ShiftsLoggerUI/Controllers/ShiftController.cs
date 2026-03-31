@@ -1,10 +1,11 @@
-﻿
+﻿using ShiftsLoggerUI.Models;
+using ShiftsLoggerUI.Services;
 using Spectre.Console;
 using System.Globalization;
 
 namespace ShiftsLoggerUI.Controllers
 {
-    internal class ShiftsController
+    internal class ShiftController
     {
 
         internal void LogShift()
@@ -36,6 +37,16 @@ namespace ShiftsLoggerUI.Controllers
                 startTime = Console.ReadLine()!;
             }
 
+            Shift shift = new Shift
+            {
+                JobTitle = jobTitle,
+                start = DateTime.ParseExact(startTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                end = DateTime.ParseExact(endTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
+            };
+            ShiftsService shiftsService = new ShiftsService();
+
+            //TODO figure out if this is the best way to handle cs4014
+            _ = shiftsService.LogShift(shift);
         }
     }
 }

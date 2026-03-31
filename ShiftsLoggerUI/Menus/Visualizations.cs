@@ -25,8 +25,7 @@ namespace ShiftsLoggerUI.Menus
 
             AnsiConsole.Write(table);
 
-
-
+            
         }
     }
 }

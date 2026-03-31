@@ -64,25 +64,7 @@ public class ShiftsController(IShiftsService shiftService) : ControllerBase
         return Ok(result);
     }
 
-    public static void LogShift()
-    {
-        throw new NotImplementedException();
-    }
 
-    public static void UpdateShift()
-    {
-        throw new NotImplementedException();
-    }
-
-    public static void ViewShifts()
-    {
-        throw new NotImplementedException();
-    }
-
-    public static void DeleteShift()
-    {
-        throw new NotImplementedException();
-    }
 }
 
 /* DELETE WHEN DONE DEBUGGING JSON INPUTS FOR POSTMAN

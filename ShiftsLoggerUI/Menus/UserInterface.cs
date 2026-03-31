@@ -1,4 +1,5 @@
 ﻿using ShiftsLoggerUI.Services;
+using ShiftsLoggerUI.Controllers;
 using Spectre.Console;
 
 namespace ShiftsLoggerUI.Menus
@@ -26,10 +27,13 @@ namespace ShiftsLoggerUI.Menus
 
             switch(choice){
                 case "Log a new shift":
-                   ShiftsController.LogShift();
+                    ShiftController shiftController = new ShiftController();
+                    shiftController.LogShift();
                     break;
+
                 case "View all past shifts":
                     ShiftsService shiftsService = new ShiftsService();
+                    //TODO i think this is broken because of discard operator??
                     _ = shiftsService.ShowAllShifts();
                     break;
                 case "Update a shift":

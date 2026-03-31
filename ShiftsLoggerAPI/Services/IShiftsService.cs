@@ -14,7 +14,6 @@ namespace ShiftsLoggerAPI.Services
         public string? DeleteShift(int id);
     }
 
-    //TODO figure out nulls here
     public class ShiftService : IShiftsService
     {
         private readonly ShiftsDbContext _context;
