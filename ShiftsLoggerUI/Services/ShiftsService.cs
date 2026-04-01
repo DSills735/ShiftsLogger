@@ -1,60 +1,66 @@
 ﻿using Newtonsoft.Json;
 using ShiftsLoggerUI.Models;
+
 namespace ShiftsLoggerUI.Services
 {
     internal class ShiftsService
     {
-        //conn link http://localhost:7064/api/shifts
-        //todo need to come back and further test this once the log area is done
-
         private static readonly HttpClient client = new HttpClient();
+
+        static ShiftsService()
+        {
+            client.BaseAddress = new Uri("http://localhost:7064/");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        }
+
         internal async Task ShowAllShifts()
         {
-
-            client.BaseAddress = new Uri("http://localhost:7064/");
             try
             {
                 string shifts = await client.GetStringAsync("api/shifts");
 
-                if (shifts == null)
+                if (string.IsNullOrEmpty(shifts))
                 {
                     Console.WriteLine("No shifts found.");
                     return;
                 }
-                var serializedShifts = JsonConvert.DeserializeObject<Shifts>(shifts);
 
-                if (serializedShifts != null)
+                var deserializedShift = JsonConvert.DeserializeObject<List<Shift>>(shifts);
+
+                if (deserializedShift != null && deserializedShift.Count > 0)
                 {
-                    List<Shift>? deserializedShift = serializedShifts.ShiftList;
-
                     Menus.Visualizations.ShowAllShiftsTable(deserializedShift);
                 }
-
-
+                else
+                {
+                    Console.WriteLine("No shifts found.");
+                }
             }
             catch (HttpRequestException ex)
             {
                 Console.WriteLine($"Network error: {ex.Message}");
-                
+                Console.WriteLine("Tip: Verify the API is running at http://localhost:7064");
             }
-            catch (JsonException ex)
+            catch (JsonSerializationException ex)
             {
-                Console.WriteLine($"Deserialization error: {ex.Message}. Check if the API returns a List or an Object.");
+                Console.WriteLine($"Deserialization error: {ex.Message}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
+
+            Console.ReadKey();
         }
 
         internal async Task LogShift(Shift shift)
         {
-            client.BaseAddress = new Uri("http://localhost:7064/");
             try
             {
                 var jsonContent = JsonConvert.SerializeObject(shift);
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("api/shifts", content);
+
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Shift logged successfully.");
@@ -67,16 +73,16 @@ namespace ShiftsLoggerUI.Services
             catch (HttpRequestException ex)
             {
                 Console.WriteLine($"Network error: {ex.Message}");
+                Console.WriteLine("Tip: Verify the API is running at http://localhost:7064");
             }
-            catch (JsonException ex)
+            catch (JsonSerializationException ex)
             {
-                Console.WriteLine($"Deserialization error: {ex.Message}. Check if the API returns a List or an Object.");
+                Console.WriteLine($"Serialization error: {ex.Message}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
-
         }
     }
 }

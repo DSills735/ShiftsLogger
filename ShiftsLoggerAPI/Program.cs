@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ShiftsDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IShiftsService, ShiftService>();
+builder.WebHost.UseUrls("http://localhost:7064");
 
 var app = builder.Build();
 
