@@ -10,7 +10,7 @@ namespace ShiftsLoggerUI.Menus
             var table = new Table()
                 .RoundedBorder()
                 .BorderColor(Color.Blue)
-                .Title("Sifts")
+                .Title("Shifts")
                 .AddColumn("Shift ID")
                 .AddColumn("Job Title")
                 .AddColumn("Start Time")

@@ -84,5 +84,63 @@ namespace ShiftsLoggerUI.Services
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+
+        internal async Task UpdateShift(int id, Shift shift)
+        {
+            try
+            {
+                var jsonContent = JsonConvert.SerializeObject(shift);
+                var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PutAsync($"api/shifts/{id}", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Shift updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to update shift. Status code: {response.StatusCode}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Network error: {ex.Message}");
+            }
+            catch (JsonSerializationException ex)
+            {
+                Console.WriteLine($"Serialization error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        internal async Task DeleteShift(int shiftId)
+        {
+            try
+            {
+                var response = await client.DeleteAsync($"api/shifts/{shiftId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Shift deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to delete shift. Status code: {response.StatusCode}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Network error: {ex.Message}");
+            }
+            catch (JsonSerializationException ex)
+            {
+                Console.WriteLine($"Serialization error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+        }
     }
-}

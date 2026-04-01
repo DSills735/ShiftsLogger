@@ -28,8 +28,8 @@ namespace ShiftsLoggerUI.Menus
                    {
                     "Log a new shift",
                     "View all past shifts",
-                    "Update a shift - not implemented",
-                    "Delete a shift - not implemented",
+                    "Update a shift.",
+                    "Delete a shift",
                     "Exit"
                    }));
 
@@ -60,7 +60,7 @@ namespace ShiftsLoggerUI.Menus
                     case "Delete a shift":
                     {
                         var shiftController = new ShiftController();
-                        // await shiftController.DeleteShift();
+                        await shiftController.DeleteShift();
                         break;
                     }
 
