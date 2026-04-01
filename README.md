@@ -2,10 +2,10 @@
 This is an app designed to log "shifts" to a database. I can use this for my own personal "shift" logging, which in this case is myself working on SWE projects. 
 This app is a full stack design with a minimal API, and a console frontend. This is configured to run on localhost:7064.
 
-**Tech used:** Entity Framework, ADO.NET Http, Spectre Console, Postman.
+**Tech used:** Entity Framework, ASP.NET, Spectre Console, Postman.
 
 Entity Framework used to assist with API creation. Postman was used for API debugging and testing. .Net HttpClient and Spectre Console was used on the frontend. 
-This was my first experience with .NET HttpClient and I much enjoyed it over using RESTSharp. Though they are quite similar, I felt as if this worked smoother, and made more sense in my head.
+This was my first experience with .NET HttpClient and I much enjoyed it over using RESTSharp. Though they felt quite similar, I felt as if this worked smoother, and made more sense in my head.
 
 ## Optimizations
 
