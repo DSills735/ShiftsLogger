@@ -8,7 +8,7 @@ namespace ShiftsLoggerUI.Services
         //todo need to come back and further test this once the log area is done
 
         private static readonly HttpClient client = new HttpClient();
-        public async Task ShowAllShifts()
+        internal async Task ShowAllShifts()
         {
 
             client.BaseAddress = new Uri("http://localhost:7064/");
@@ -32,13 +32,22 @@ namespace ShiftsLoggerUI.Services
 
 
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Network error: {ex.Message}");
+                
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Deserialization error: {ex.Message}. Check if the API returns a List or an Object.");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
 
-        public async Task LogShift(Shift shift)
+        internal async Task LogShift(Shift shift)
         {
             client.BaseAddress = new Uri("http://localhost:7064/");
             try
@@ -54,6 +63,14 @@ namespace ShiftsLoggerUI.Services
                 {
                     Console.WriteLine($"Failed to log shift. Status code: {response.StatusCode}");
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Network error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Deserialization error: {ex.Message}. Check if the API returns a List or an Object.");
             }
             catch (Exception ex)
             {

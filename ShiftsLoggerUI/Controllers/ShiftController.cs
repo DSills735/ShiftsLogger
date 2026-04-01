@@ -15,7 +15,7 @@ namespace ShiftsLoggerUI.Controllers
             string jobTitle = AnsiConsole.Ask<string>("Enter your job title.");
             string startTime;
             string endTime;
-            bool valid = false;
+            
             AnsiConsole.MarkupLine("Please enter the start time of your shift in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
                 startTime = Console.ReadLine()!;
 
@@ -27,7 +27,7 @@ namespace ShiftsLoggerUI.Controllers
                 startTime = Console.ReadLine()!;
             }
 
-            valid = false;
+            
             AnsiConsole.MarkupLine("Please enter the end time of your shift in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
             endTime = Console.ReadLine()!;
 
@@ -45,7 +45,7 @@ namespace ShiftsLoggerUI.Controllers
             };
             ShiftsService shiftsService = new ShiftsService();
 
-            //TODO figure out if this is the best way to handle cs4014
+            //TODO figure out if this is the best way to handle cs4014 - await could be the answer
             await shiftsService.LogShift(shift);
         }
     }
