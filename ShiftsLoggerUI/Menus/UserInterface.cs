@@ -33,31 +33,41 @@ namespace ShiftsLoggerUI.Menus
                     "Exit"
                    }));
 
+                
                 switch (choice)
                 {
                     case "Log a new shift":
-                        ShiftController shiftController = new ShiftController();
+                    {
+                        var shiftController = new ShiftController();
                         await shiftController.LogShift();
                         break;
+                    }
 
                     case "View all past shifts":
-                        ShiftsService shiftsService = new ShiftsService();
-
+                    {
+                        var shiftsService = new ShiftsService();
                         await shiftsService.ShowAllShifts();
                         break;
+                    }
+
                     case "Update a shift":
-
-                        //ShiftController.UpdateShift();
+                    {
+                        var shiftController = new ShiftController();
+                        await shiftController.UpdateShift();
                         break;
+                    }
+
                     case "Delete a shift":
-
-                        //shiftController.DeleteShift();
+                    {
+                        var shiftController = new ShiftController();
+                        // await shiftController.DeleteShift();
                         break;
+                    }
+
                     case "Exit":
                         AnsiConsole.MarkupLine("[slowblink][red] Exiting the application. Goodbye![/][/]");
                         Environment.Exit(0);
                         break;
-
                 }
 
             }

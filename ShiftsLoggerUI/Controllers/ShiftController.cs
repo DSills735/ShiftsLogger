@@ -46,5 +46,29 @@ namespace ShiftsLoggerUI.Controllers
 
             await shiftsService.LogShift(shift);
         }
+
+        internal async Task UpdateShift()
+        {
+            Console.WriteLine("What shift do you want to update?\n");
+
+            var shiftsService = new ShiftsService();
+                await shiftsService.ShowAllShifts();
+    
+                int shiftId = AnsiConsole.Ask<int>("Enter the [underline][bold]Shift ID[/][/] of the shift you want to update.");
+    
+                Console.WriteLine($"You want to update shift with ID: {shiftId}");
+
+            var choice = AnsiConsole.Prompt(
+               new SelectionPrompt<string>()
+               .Title("What metric do you want to update")
+               .AddChoices(new[]
+               {
+                    "Title",
+                    "Start time",
+                    "End time"
+               }));
+
+
+        }
     }
 }
