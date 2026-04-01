@@ -1,6 +1,6 @@
 # Shifts Logger
 This is an app designed to log "shifts" to a database. I can use this for my own personal "shift" logging, which in this case is myself working on SWE projects. 
-This app is a full stack design with a minimal API, and a console frontend. 
+This app is a full stack design with a minimal API, and a console frontend. This is configured to run on localhost:7064.
 
 **Tech used:** Entity Framework, ADO.NET Http, Spectre Console, Postman.
 
