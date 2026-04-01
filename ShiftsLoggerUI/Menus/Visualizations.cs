@@ -19,7 +19,7 @@ namespace ShiftsLoggerUI.Menus
             
             foreach (var shift in shifts)
             {
-                //TODO Fix table
+     
                 table.AddRow(shift.id.ToString(), shift.JobTitle, shift.start.ToString("yyyy-MM-dd HH:mm"), shift.end.ToString("yyyy-MM-dd HH:mm"), shift.HoursWorked.ToString("F2"));
             }
 

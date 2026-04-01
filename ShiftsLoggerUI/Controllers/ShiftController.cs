@@ -19,7 +19,6 @@ namespace ShiftsLoggerUI.Controllers
             AnsiConsole.MarkupLine("Please enter the start time of your shift in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
                 startTime = Console.ReadLine()!;
 
-            //TODO need to check this validation.. I think its OK
 
             while (!DateTime.TryParseExact(startTime, "yyyy-MM-dd HH:mm",  CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
             {
@@ -45,7 +44,6 @@ namespace ShiftsLoggerUI.Controllers
             };
             ShiftsService shiftsService = new ShiftsService();
 
-            //TODO figure out if this is the best way to handle cs4014 - await could be the answer
             await shiftsService.LogShift(shift);
         }
     }
