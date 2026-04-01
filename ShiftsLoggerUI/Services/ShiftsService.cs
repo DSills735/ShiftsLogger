@@ -13,7 +13,7 @@ namespace ShiftsLoggerUI.Services
             client.Timeout = TimeSpan.FromSeconds(30);
         }
 
-        internal async Task ShowAllShifts()
+        internal async Task ShowAllShifts(bool stay = true)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace ShiftsLoggerUI.Services
 
                 if (deserializedShift != null && deserializedShift.Count > 0)
                 {
-                    Menus.Visualizations.ShowAllShiftsTable(deserializedShift);
+                    Menus.Visualizations.ShowAllShiftsTable(deserializedShift, stay);
                 }
                 else
                 {
@@ -50,7 +50,6 @@ namespace ShiftsLoggerUI.Services
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
 
-            Console.ReadKey();
         }
 
         internal async Task LogShift(Shift shift)
@@ -142,5 +141,20 @@ namespace ShiftsLoggerUI.Services
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+
+        internal static async Task<Shift> GetShiftById(int id)
+        {
+            try
+            {
+                string shift = await client.GetStringAsync($"api/shifts/{id}");
+                var deserializedShift = JsonConvert.DeserializeObject<Shift>(shift);
+                return deserializedShift!;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching shift: {ex.Message}");
+                return null!;
+            }
         }
+    }
     }

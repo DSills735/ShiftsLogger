@@ -5,7 +5,7 @@ namespace ShiftsLoggerUI.Menus
 {
     internal class Visualizations
     {
-        internal static void ShowAllShiftsTable(List<Shift> shifts)
+        internal static void ShowAllShiftsTable(List<Shift> shifts, bool stay = true)
         {
             var table = new Table()
                 .RoundedBorder()
@@ -25,7 +25,11 @@ namespace ShiftsLoggerUI.Menus
 
             AnsiConsole.Write(table);
 
-            
+            if (stay)
+            {
+                Console.WriteLine("Press any key to return to the menu");
+                Console.ReadKey();
+            }
         }
     }
 }

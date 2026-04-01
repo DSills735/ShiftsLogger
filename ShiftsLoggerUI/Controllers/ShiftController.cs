@@ -52,7 +52,7 @@ namespace ShiftsLoggerUI.Controllers
             Console.WriteLine("What shift do you want to update?\n");
 
             var shiftsService = new ShiftsService();
-            await shiftsService.ShowAllShifts();
+            await shiftsService.ShowAllShifts(false);
 
             int shiftId = AnsiConsole.Ask<int>("Enter the [underline][bold]Shift ID[/][/] of the shift you want to update.");
 
@@ -71,27 +71,49 @@ namespace ShiftsLoggerUI.Controllers
             switch (choice)
             {
                 case "Title":
-                    string newTitle = AnsiConsole.Ask<string>("Enter the new job title.");
-                    await shiftsService.UpdateShift(shiftId, new Shift { JobTitle = newTitle });
+                {
+                    var existingShift = await ShiftsService.GetShiftById(shiftId);
+                    if (existingShift != null)
+                    {
+                        existingShift.JobTitle = AnsiConsole.Ask<string>("Enter the new job title.");
+                        await shiftsService.UpdateShift(shiftId, existingShift);
+                    }
                     break;
+                }
+
                 case "Start time":
-                    string newStartTime = AnsiConsole.Ask<string>("Enter the new start time in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
-                    while (!DateTime.TryParseExact(newStartTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                {
+                    var existingShift = await ShiftsService.GetShiftById(shiftId);
+                    if (existingShift != null)
                     {
-                        Console.WriteLine("Invalid input. Please enter a valid start time in the format: yyyy-MM-dd HH:mm");
-                        newStartTime = Console.ReadLine()!;
+                        string newStartTime = AnsiConsole.Ask<string>("Enter the new start time in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
+                        while (!DateTime.TryParseExact(newStartTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid start time in the format: yyyy-MM-dd HH:mm");
+                            newStartTime = Console.ReadLine()!;
+                        }
+                        existingShift.start = DateTime.ParseExact(newStartTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+                        await shiftsService.UpdateShift(shiftId, existingShift);
                     }
-                    await shiftsService.UpdateShift(shiftId, new Shift { start = DateTime.ParseExact(newStartTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) });
                     break;
+                }
+
                 case "End time":
-                    string newEndTime = AnsiConsole.Ask<string>("Enter the new end time in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
-                    while (!DateTime.TryParseExact(newEndTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                {
+                    var existingShift = await ShiftsService.GetShiftById(shiftId);
+                    if (existingShift != null)
                     {
-                        Console.WriteLine("Invalid input. Please enter a valid end time in the format: yyyy-MM-dd HH:mm");
-                        newEndTime = Console.ReadLine()!;
+                        string newEndTime = AnsiConsole.Ask<string>("Enter the new end time in the format: [underline][bold]yyyy-MM-dd HH:mm[/][/]");
+                        while (!DateTime.TryParseExact(newEndTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid end time in the format: yyyy-MM-dd HH:mm");
+                            newEndTime = Console.ReadLine()!;
+                        }
+                        existingShift.end = DateTime.ParseExact(newEndTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+                        await shiftsService.UpdateShift(shiftId, existingShift);
                     }
-                    await shiftsService.UpdateShift(shiftId, new Shift { end = DateTime.ParseExact(newEndTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) });
                     break;
+                }
             }
 
         }
@@ -100,7 +122,7 @@ namespace ShiftsLoggerUI.Controllers
         {
             Console.WriteLine("What shift do you want to delete?\n");
             var shiftsService = new ShiftsService();
-            await shiftsService.ShowAllShifts();
+            await shiftsService.ShowAllShifts(false);
 
             int shiftId = AnsiConsole.Ask<int>("Enter the [underline][bold]Shift ID[/][/] of the shift you want to delete.");
 

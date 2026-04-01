@@ -28,7 +28,7 @@ namespace ShiftsLoggerUI.Menus
                    {
                     "Log a new shift",
                     "View all past shifts",
-                    "Update a shift.",
+                    "Update a shift",
                     "Delete a shift",
                     "Exit"
                    }));
