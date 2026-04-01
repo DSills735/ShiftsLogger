@@ -36,6 +36,12 @@ namespace ShiftsLoggerUI.Controllers
                 startTime = Console.ReadLine()!;
             }
 
+            while (!Validation.ShiftInputValidation.ValidateEndTimeIsAfterStartTimeInput(startTime, endTime))
+            {
+                Console.WriteLine("End time must be after start time. Please enter a valid end time in the format: yyyy-MM-dd HH:mm");
+                endTime = Console.ReadLine()!;
+            }
+
             Shift shift = new Shift
             {
                 JobTitle = jobTitle,
@@ -45,6 +51,12 @@ namespace ShiftsLoggerUI.Controllers
             ShiftsService shiftsService = new ShiftsService();
 
             await shiftsService.LogShift(shift);
+            AnsiConsole.Status()
+                         .Start("Adding shift to database", ctx =>
+                         {
+                             ctx.Spinner(Spinner.Known.Aesthetic);
+                             Thread.Sleep(3000);
+                         });
         }
 
         internal async Task UpdateShift()
@@ -108,6 +120,12 @@ namespace ShiftsLoggerUI.Controllers
                         {
                             Console.WriteLine("Invalid input. Please enter a valid end time in the format: yyyy-MM-dd HH:mm");
                             newEndTime = Console.ReadLine()!;
+                        }
+                        if(existingShift.start > DateTime.ParseExact(newEndTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture))
+                        {
+                            Console.WriteLine("End time cannot be before start time. Update cancelled.");
+                              Thread.Sleep(1000);
+                            return;
                         }
                         existingShift.end = DateTime.ParseExact(newEndTime, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
                         await shiftsService.UpdateShift(shiftId, existingShift);
