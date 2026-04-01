@@ -13,6 +13,7 @@ Compared to previous projects (specifically flight data API), as described above
 
 As usual, I felt my UI/UX design improved over previous programs Ive developed, and I am constantly learning new ways to make the experience smoother. I would like to improve on the shift input in this app, as I feel date/time entering is tedious. 
 I also feel as if that is just a side effect of using the console for this application. 
+This is the first app I've developed where I decided to enable copilot. I really enjoyed using copilot, and it really saved me a ton of time when writing boilerplate code. I kept it disabled until now to force myself to learn syntax and not "vibe code".
 
 
 ## Lessons Learned
