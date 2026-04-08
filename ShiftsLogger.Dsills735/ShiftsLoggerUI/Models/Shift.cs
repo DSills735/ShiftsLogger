@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace ShiftsLoggerUI.Models
 {
@@ -9,6 +8,7 @@ namespace ShiftsLoggerUI.Models
         [JsonProperty("Shifts")]
         public required List<Shift> ShiftList { get; set; }
     }
+
 
     public class Shift
     {

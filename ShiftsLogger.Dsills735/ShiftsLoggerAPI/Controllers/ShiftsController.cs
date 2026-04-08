@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShiftsLoggerAPI.Services;
 using ShiftsLoggerAPI.Models;
+
  /*Postman URLs
  GET    https://localhost:7064/api/shifts
  GET    https://localhost:7064/api/shifts/{id}
@@ -64,7 +65,6 @@ public class ShiftsController(IShiftsService shiftService) : ControllerBase
         }
         return Ok(result);
     }
-
 
 }
 
